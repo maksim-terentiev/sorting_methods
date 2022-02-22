@@ -19,6 +19,7 @@ begin
 	writeln
 end;
 
+
 procedure generate_array(var arr:T_arr; n:integer; gen_type:integer);
   procedure gen_inverted(var arr:T_arr; n:integer);
   const MaxAdd=10;
@@ -59,6 +60,7 @@ begin
 	3,4: gen_random(arr,n);   { random  }
 	end;
 end;
+
 
 procedure bubble_sort(var arr:T_arr; n:integer);
 var sorted:boolean;
@@ -103,14 +105,18 @@ begin
 	writeln
 end;
 
+
 procedure heap_sort(var arr:T_arr; n:integer);
 begin
 
 end;
 
+
+procedure testing;
+var arr:T_arr;
+    n:integer;
+    i:integer;
 begin
-	randomize;
-	
 	n:=6;                            
 	for i:=1 to 4 do                 
 	begin                            
@@ -122,5 +128,9 @@ begin
 		write_array(arr,n);
 		writeln
 	end;                             
-	
+end;
+
+begin
+	randomize;
+	testing;
 end.
