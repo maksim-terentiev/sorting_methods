@@ -1,3 +1,4 @@
+{$define VERBOSE}
 program sort_research;
 type
 	T_elem=integer;
@@ -8,6 +9,15 @@ type
 var arr:T_arr;
     n:integer;
     i:integer;
+
+procedure write_array(var arr:T_arr; n:integer);
+var i:integer;
+begin
+	write(arr[0]);
+	for i:=1 to n-1 do
+		write(' ', arr[i]);
+	writeln
+end;
 
 procedure generate_array(var arr:T_arr; n:integer; gen_type:integer);
   procedure gen_inverted(var arr:T_arr; n:integer);
@@ -50,9 +60,47 @@ begin
 	end;
 end;
 
-procedure select_sort(var arr:T_arr; n:integer);
+procedure bubble_sort(var arr:T_arr; n:integer);
+var sorted:boolean;
+    i:integer;
+    cmp_count,swap_count:integer;
+  procedure swap(var a,b:T_elem);
+  var tmp:T_elem;
+  begin
+      tmp:=a;
+      a:=b;
+      b:=tmp;
+  end;
 begin
+	cmp_count:=0; swap_count:=0;
 
+	writeln('* Bubble sort started *');
+	{$ifdef VERBOSE}
+	write('* '); write_array(arr,n);
+	{$endif}
+
+	sorted:=false;
+	while not sorted do
+	begin
+		sorted:=true;
+		for i:=0 to n-2 do
+		begin
+			inc(cmp_count);
+			if arr[i] < arr[i+1] then
+			begin
+				sorted:=false;
+				inc(swap_count);
+				swap(arr[i],arr[i+1]);
+			end;
+		end;
+		{$ifdef VERBOSE}
+		write('* '); write_array(arr,n);
+		{$endif}
+	end;
+	writeln('* Bubble sort ended   *');
+	writeln('* cmp=',cmp_count);
+	writeln('* swap=',swap_count);
+	writeln
 end;
 
 procedure heap_sort(var arr:T_arr; n:integer);
@@ -60,24 +108,19 @@ begin
 
 end;
 
-procedure write_array(var arr:T_arr; n:integer);
-var i:integer;
-begin
-	write(arr[0]);
-	for i:=1 to n-1 do
-		write(' ', arr[i]);
-	writeln
-end;
-
 begin
 	randomize;
-	{
+	
 	n:=6;                            
 	for i:=1 to 4 do                 
 	begin                            
 		generate_array(arr,n,i);  
 		write(i,': ');            
 		write_array(arr, n);      
+		bubble_sort(arr,n);
+		write('arr=');
+		write_array(arr,n);
+		writeln
 	end;                             
-	}
+	
 end.
