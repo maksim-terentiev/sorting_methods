@@ -1,34 +1,20 @@
 program sort_research;
 type
-	T_data=integer;
-	T_elem=record
-		data:T_data;
-		next:^T_elem
-	end;
+	T_elem=integer;
 
-{#################################}
-{# TODO: decide how to make list #}
-{#       ? var l:^T_elem ? or    #}
-{#       ? var l:T_lisr  ?       #}
-{#################################}
+	{ FPC dynamic array https://wiki.freepascal.org/Dynamic_array }
+	T_arr=array of T_elem;
 
-	T_list=record                        
-		fst:^T_elem; { fst -- first }
-		lst:^T_elem  { lst -- last  }
-	end;
+	{T_gen_type=(sorted, inverted, rand, manual);}
 
-var l:T_list;
+var arr:T_arr;
     n:integer;
 
-procedure init_list(var l:T_list);  { without first element }
+procedure generate_array(var arr:T_arr; n:integer; gen_type:integer);
 begin
-	new(l.fst);
-	l.lst:=l.fst;
-	l.fst^.next:=nil;
+
 end;
 
-procedure push(var l:T_list; data:T_data);
-var adr:^T_elem;
 begin
-	
-end;
+	randomize;
+end.
