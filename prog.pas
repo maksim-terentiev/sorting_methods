@@ -19,6 +19,17 @@ begin
 	writeln
 end;
 
+procedure read_array(var arr:T_arr; n:integer);
+var i,inp:integer;
+begin
+	SetLength(arr,n);
+	for i:=0 to n-1 do
+	begin
+		read(inp);
+		arr[i]:=inp;
+	end;
+end;
+
 
 procedure generate_array(var arr:T_arr; n:integer; gen_type:integer);
   procedure gen_inverted(var arr:T_arr; n:integer);
@@ -112,7 +123,7 @@ begin
 end;
 
 
-procedure testing;
+procedure testing; { temporaly for testing generation and bubble }
 var arr:T_arr;
     n:integer;
     i:integer;
@@ -132,5 +143,24 @@ end;
 
 begin
 	randomize;
+
+	{ ParamCount and ParamStr(i) command line options }
+	if ParamCount <> 0 then
+	begin
+		if (ParamStr(1)='-m') then
+		begin
+			read(n);
+			read_array(arr,n);
+			bubble_sort(arr,n);
+			heap_sort(arr,n);
+			halt
+		end
+		else
+		begin
+			writeln(
+		     'Please use only "./prog -m < input.txt" or "./prog"');
+			halt
+		end;
+	end;
 	testing;
 end.
