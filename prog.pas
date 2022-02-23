@@ -7,8 +7,7 @@ type
 	{ FPC dynamic array https://wiki.freepascal.org/Dynamic_array }
 	T_arr=array of T_elem;
 
-var arr:T_arr;
-    n:integer;
+var n:integer;
     i:integer;
 
 procedure write_array(var arr:T_arr; n:integer);
@@ -211,10 +210,12 @@ begin
 	end;
 end;
 
-procedure default_testing; { temporaly for testing }
+procedure default_testing;
+{
 var arr,init_arr:T_arr;
     n:integer;
     i:integer;
+}
   procedure test(n:integer);
   var arr,init_arr:T_arr;
       i:integer;
@@ -227,7 +228,7 @@ var arr,init_arr:T_arr;
 
           arr:=copy(init_arr,0,length(init_arr)); {dynArray copy}
           bubble_sort(arr,n);
-          write('arr=');
+          write('Bubble: ');
           write_array(arr,n);
           writeln;
 
@@ -236,7 +237,7 @@ var arr,init_arr:T_arr;
           write(i,': ');
           write_array(arr, n);
           heap_sort(arr,n);
-          write('arr=');
+          write('Heap:   ');
           write_array(arr,n);
           writeln;
       end;
@@ -266,14 +267,16 @@ end;
 procedure manual_input;
 var arr,init_arr:T_arr;
     n:integer;
-    i:integer;
 begin
 	read(n);
 	read_array(init_arr,n);
 	arr:=copy(init_arr,0,length(init_arr)); {dynArray copy}
 	bubble_sort(arr,n);
+	write('Sort: '); write_array(arr,n); writeln;
+
 	arr:=copy(init_arr,0,length(init_arr)); {dynArray copy}
 	heap_sort(arr,n);
+	write('Sort: '); write_array(arr,n);
 end;
 
 begin
