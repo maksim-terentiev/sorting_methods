@@ -1,4 +1,5 @@
 {$define VERBOSE}
+{$undef VERBOSE}
 program sort_research;
 type
 	T_elem=integer;
@@ -181,17 +182,17 @@ begin
 end;
 
 
-procedure testing; { temporaly for testing generation and bubble }
+procedure old_testing; { temporaly for testing }
 var arr,init_arr:T_arr;
     n:integer;
     i:integer;
 begin
-	n:=6;                            
-	for i:=1 to 4 do                 
-	begin                            
-		generate_array(init_arr,n,i);  
-		write(i,': ');            
-		write_array(init_arr, n);      
+	n:=6;
+	for i:=1 to 4 do
+	begin
+		generate_array(init_arr,n,i);
+		write(i,': ');
+		write_array(init_arr, n);
 
 		arr:=copy(init_arr,0,length(init_arr)); {dynArray copy}
 		bubble_sort(arr,n);
@@ -201,13 +202,65 @@ begin
 
 
 		arr:=copy(init_arr,0,length(init_arr)); {dynArray copy}
-		write(i,': ');            
-		write_array(arr, n);      
+		write(i,': ');
+		write_array(arr, n);
 		heap_sort(arr,n);
 		write('arr=');
 		write_array(arr,n);
 		writeln;
-	end;                             
+	end;
+end;
+
+procedure default_testing; { temporaly for testing }
+var arr,init_arr:T_arr;
+    n:integer;
+    i:integer;
+  procedure test(n:integer);
+  var arr,init_arr:T_arr;
+      i:integer;
+  begin
+      for i:=1 to 4 do
+      begin
+          generate_array(init_arr,n,i);
+          write(i,': ');
+          write_array(init_arr, n);
+
+          arr:=copy(init_arr,0,length(init_arr)); {dynArray copy}
+          bubble_sort(arr,n);
+          write('arr=');
+          write_array(arr,n);
+          writeln;
+
+
+          arr:=copy(init_arr,0,length(init_arr)); {dynArray copy}
+          write(i,': ');
+          write_array(arr, n);
+          heap_sort(arr,n);
+          write('arr=');
+          write_array(arr,n);
+          writeln;
+      end;
+  end;
+begin
+	n:=10;
+	writeln('---- Start for n=',n,' ----');writeln;
+	test(n);
+	writeln('------ End for n=',n,' ----');
+
+	n:=20;
+	writeln('---- Start for n=',n,' ----');writeln;
+	test(n);
+	writeln('------ End for n=',n,' ----');
+
+	n:=50;
+	writeln('---- Start for n=',n,' ----');writeln;
+	test(n);
+	writeln('------ End for n=',n,' ----');
+
+	n:=100;
+	writeln('---- Start for n=',n,' ----');writeln;
+	test(n);
+	writeln('------ End for n=',n,' ----');
 end;
 
 procedure manual_input;
@@ -241,5 +294,5 @@ begin
 			halt
 		end;
 	end
-	else testing;
+	else default_testing;
 end.
