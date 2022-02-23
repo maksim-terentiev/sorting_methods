@@ -210,6 +210,19 @@ begin
 	end;                             
 end;
 
+procedure manual_input;
+var arr,init_arr:T_arr;
+    n:integer;
+    i:integer;
+begin
+	read(n);
+	read_array(init_arr,n);
+	arr:=copy(init_arr,0,length(init_arr)); {dynArray copy}
+	bubble_sort(arr,n);
+	arr:=copy(init_arr,0,length(init_arr)); {dynArray copy}
+	heap_sort(arr,n);
+end;
+
 begin
 	randomize;
 
@@ -218,10 +231,7 @@ begin
 	begin
 		if (ParamStr(1)='-m') then
 		begin
-			read(n);
-			read_array(arr,n);
-			bubble_sort(arr,n);
-			heap_sort(arr,n);
+			manual_input;
 			halt
 		end
 		else
@@ -230,6 +240,6 @@ begin
 		     'Please use only "./prog -m < input.txt" or "./prog"');
 			halt
 		end;
-	end;
-	testing;
+	end
+	else testing;
 end.
